@@ -17,6 +17,7 @@ const (
 	redisMaxIdle         = 3
 	redisDefaultAddr     = ":6379"
 	redisDefaultPassword = "foobared" //change to yours
+	redisDefaultDatabase = 0          //change to yours
 )
 
 var redisIdleTimeout = 240 * time.Second
