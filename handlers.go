@@ -8,6 +8,7 @@ http://opensource.org/licenses/MIT
 package main
 
 import (
+	"fmt"
 	"image"
 	"image/jpeg"
 	_ "image/png"
@@ -17,11 +18,11 @@ import (
 	"strings"
 	"time"
 
-	"code.google.com/p/go-uuid/uuid"
 	"github.com/garyburd/redigo/redis"
-	"github.com/lucachr/gopics/auth"
-	"github.com/lucachr/gopics/flash"
 	"github.com/nfnt/resize"
+	uuid "github.com/satori/go.uuid"
+	"github.com/vulcangz/gopics/auth"
+	"github.com/vulcangz/gopics/flash"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -325,7 +326,17 @@ func handlePost(w http.ResponseWriter, r *http.Request,
 	}
 
 	// The image name is generated as an uuid
-	picName := uuid.New() + ".jpeg"
+	//picName := uuid.New() + ".jpeg"
+	// or error handling
+	u2, err := uuid.NewV4()
+	if err != nil {
+		fmt.Printf("Something went wrong: %s", err)
+		return &appError{
+			Err:  err,
+			Code: http.StatusInternalServerError,
+		}
+	}
+	picName := u2.String() + ".jpeg"
 	path := append(mediaPath, picName)
 
 	// Create a new file
