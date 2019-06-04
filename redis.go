@@ -22,7 +22,7 @@ var redisIdleTimeout = 240 * time.Second
 
 // newPool creates a new connections pool for concurrent access
 // to Redis.
-func newPool(server string) *redis.Pool {
+func newPool(server, password string, db int) *redis.Pool {
 	return &redis.Pool{
 		MaxIdle:     redisMaxIdle,
 		IdleTimeout: redisIdleTimeout,
@@ -31,6 +31,17 @@ func newPool(server string) *redis.Pool {
 			if err != nil {
 				return nil, err
 			}
+
+			if _, err := c.Do("AUTH", password); err != nil {
+				c.Close()
+				return nil, err
+			}
+
+			if _, err := c.Do("SELECT", db); err != nil {
+				c.Close()
+				return nil, err
+			}
+
 			return c, err
 		},
 		TestOnBorrow: func(c redis.Conn, t time.Time) error {
