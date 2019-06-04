@@ -12,7 +12,7 @@ import (
 	"os"
 
 	"github.com/garyburd/redigo/redis"
-	"github.com/lucachr/gopics/auth"
+	"github.com/vulcangz/gopics/auth"
 )
 
 const (
@@ -45,8 +45,10 @@ var (
 		"static",
 	}
 
-	pool        *redis.Pool
-	redisServer = flag.String("redisServer", redisDefaultAddr, "")
+	pool          *redis.Pool
+	redisServer   = flag.String("redisServer", redisDefaultAddr, "redis server")
+	redisPassword = flag.String("redisPassword", redisDefaultPassword, "redis password")
+	redisDatabase = flag.Int("redisDatabase", redisDefaultDatabase, "redis database")
 
 	// A slice with the path of your media directory
 	basePath = []string{os.Getenv("GOPATH"), "src", "github.com",
