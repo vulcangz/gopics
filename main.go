@@ -17,7 +17,7 @@ import (
 func main() {
 	// Create a new Redis pool
 	flag.Parse()
-	pool = newPool(*redisServer)
+	pool = newPool(*redisServer, *redisPassword, redisDefaultDatabase)
 
 	http.Handle("/", appHandler(handleRoot))
 	http.Handle("/register", appHandler(handleRegister))
