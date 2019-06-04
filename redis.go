@@ -14,14 +14,17 @@ import (
 )
 
 const (
-	redisMaxIdle     = 3
-	redisDefaultAddr = ":6379"
+	redisMaxIdle         = 3
+	redisDefaultAddr     = ":6379"
+	redisDefaultPassword = "foobared" //change to yours
 )
 
 var redisIdleTimeout = 240 * time.Second
 
 // newPool creates a new connections pool for concurrent access
 // to Redis.
+// add parameters and processing: to authenticate connections with the AUTH command
+// or select a database with the SELECT command
 func newPool(server, password string, db int) *redis.Pool {
 	return &redis.Pool{
 		MaxIdle:     redisMaxIdle,
