@@ -15,14 +15,23 @@ Installation
 -------------
 
 ```shell
-    go get github.com/lucachr/gopics
+    go get github.com/vulcangz/gopics
 ```
+Build
+------
+
+If you modify a program, you need to recompile
+
+```shell
+    go build
+```
+
 Usage
 ------
 
 [Redis](http://redis.io/) have to be installed and a Redis instance needs to be 
 up and running.  
-After installing GoPics, start the server with
+After installing or rebuilding GoPics, start the server with
 
 ```shell
    $ gopics

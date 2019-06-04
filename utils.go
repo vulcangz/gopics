@@ -14,7 +14,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/lucachr/gopics/flash"
+	"github.com/vulcangz/gopics/flash"
 )
 
 // renderTemplate executes a template with the data contained in the given
